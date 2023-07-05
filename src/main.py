@@ -1,3 +1,5 @@
+import os
+import psycopg2
 from signalrcore.hub_connection_builder import HubConnectionBuilder
 import logging
 import requests
@@ -7,13 +9,14 @@ import time
 
 class Main:
     def __init__(self):
-        self._hub_connection = None
-        self.HOST = None  # Setup your host here
-        self.TOKEN = None  # Setup your token here
-        self.TICKETS = None  # Setup your tickets here
-        self.T_MAX = None  # Setup your max temperature here
-        self.T_MIN = None  # Setup your min temperature here
-        self.DATABASE = None  # Setup your database here
+        self._hub_connection = None 
+        self.HOST = os.environ['HOST']
+        self.TOKEN = os.environ['TOKEN']
+        self.TICKETS = os.environ['TICKETS']
+        self.T_MAX = os.environ['T_MAX']
+        self.T_MIN = os.environ['T_MIN']
+        # Setup your database here
+        self.DATABASE = "postgresql+psycopg2://postgres:LOG6802023@localhost/postgres"
 
     def __del__(self):
         if self._hub_connection != None:
@@ -74,10 +77,20 @@ class Main:
 
     def send_event_to_database(self, timestamp, event):
         try:
-            # To implement
+            connection = psycopg2.connect(self.DATABASE)
+            cursor = connection.cursor()
+
+            
+            sql = "INSERT INTO events (timestamp, event) VALUES (%s, %s)"
+            values = (timestamp, event)
+            cursor.execute(sql, values)
+
+            connection.commit()
+            cursor.close()
+            connection.close()
             pass
         except requests.exceptions.RequestException as e:
-            # To implement
+            print("Error while sending event to the database:", e)
             pass
 
 
