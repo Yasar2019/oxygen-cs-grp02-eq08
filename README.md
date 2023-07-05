@@ -18,8 +18,8 @@ This application uses `pipenv`, a tool that aims to bring the best of all packag
 1. Clone the repository :
 
 ```
-git clone https://github.com/your-username/sensor-hub-monitor.git
-cd sensor-hub-monitor
+git clone https://github.com/MarioGith/log680.git
+cd log680
 ```
 
 2. Install the project's dependencies :
