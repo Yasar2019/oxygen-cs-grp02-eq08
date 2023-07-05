@@ -6,13 +6,20 @@ name = "pypi"
 [packages]
 requests = "*"
 signalrcore = "*"
+psycopg2 = "*"
 
 [dev-packages]
+pylint = "*"
+black = "*"
+pre-commit = "*"
+pytest = "*"
+pytest-cov = "*"
+pytest-mock = "*"
 
 [requires]
-python_version = "3.8"
+python_version = "3.10.11"
 
 [scripts]
 start = "python src/main.py"
-test = "# To implement"
+test = "python test/test.py"
 lint = "# To implement"
