@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hvac
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hvac
+  template:
+    metadata:
+      labels:
+        app: hvac
+    spec:
+      containers:
+      - name: hvac
+        image: yasar2019/my_docker_image
+        ports:
+        - containerPort: 5000
+        env:
+        - name: HOST
+          value: "http://34.95.34.5/"
+        - name: TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: my-secret
+              key: TOKEN
+        - name: TICKETS
+          value: "1"
+        - name: T_MAX
+          value: "30"
+        - name: T_MIN
+          value: "15"
+        - name: DATABASE
+          value: "postgresql+psycopg2://postgres:LOG6802023@localhost/postgres"
+        resources:
+          limits:
+            cpu: "1"
+            memory: "512Mi"
+          requests:
+            cpu: "0.5"
+            memory: "256Mi"
