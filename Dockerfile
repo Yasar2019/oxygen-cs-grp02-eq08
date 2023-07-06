@@ -10,6 +10,9 @@ COPY Pipfile Pipfile.lock ./
 # Install project dependencies
 RUN pip install pipenv && pipenv install --system --deploy
 
+# Install Pytest
+RUN pip install pytest
+
 # Copy the rest of the working directory contents into the container at /app
 COPY . /app
 
