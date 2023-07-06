@@ -75,7 +75,7 @@ class Main:
             self.send_action_to_hvac(date, "TurnOnHeater", self.TICKETS)
 
     def send_action_to_hvac(self, date, action, nbTick):
-        r = requests.get(f"{self.HOST}/api/hvac/{self.TOKEN}/{action}/{nbTick}")
+        r = requests.get(f"{self.HOST}/api/hvac/{self.TOKEN}/{action}/{nbTick}", timeout=10)
         details = json.loads(r.text)
         print(details)
 
