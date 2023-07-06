@@ -12,7 +12,7 @@ RUN pip install pipenv && pipenv install --system --deploy
 
 # Install Pytest
 RUN pip install pytest
-
+RUN pip install pylint
 # Copy the rest of the working directory contents into the container at /app
 COPY . /app
 
